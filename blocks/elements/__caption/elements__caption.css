@@ -1,0 +1,9 @@
+.elements__caption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  max-width: 90%;
+  margin: 0 auto;
+  padding-top: 3%;
+}

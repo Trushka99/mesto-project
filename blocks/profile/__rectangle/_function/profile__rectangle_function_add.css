@@ -1,0 +1,15 @@
+.profile__rectangle_function_add {
+  height: 50px;
+  width: 150px;
+  border: solid 1px white;
+  box-sizing: content-box;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+.profile__rectangle_function_add:hover {
+  border-color: grey;
+}

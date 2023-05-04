@@ -1,0 +1,16 @@
+.profile__rectangle_function_edit {
+  width: 24px;
+  height: 24px;
+  border: solid 1px white;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  cursor: pointer;
+  margin-top: -3.3%;
+  margin-left: 18px;
+  box-sizing: border-box;
+}
+.profile__rectangle_function_edit:hover {
+  border-color: grey;
+}

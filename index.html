@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="pages/index.css" />
+    <title>Mesto</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="images/Vector.svg" />
+    </header>
+    <section class="profile">
+      <img class="profile__avatar" src="images/image.png" />
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <p class="profile__subname">Исследователь океана</p>
+      </div>
+      <label class="profile__rectangle profile__rectangle_function_edit">
+        <input
+          type="checkbox"
+          class="invisible"
+          name="edit_button"
+          id="edit__buton"
+          value="edit__button"
+        />
+        <span class="profile__edit-button"></span>
+      </label>
+      <label class="profile__rectangle profile__rectangle_function_add">
+        <input
+          type="checkbox"
+          class="invisible"
+          name="add_button"
+          id="add__buton"
+          value="add__button"
+        />
+        <span class="profile__add-button"></span>
+      </label>
+    </section>
+    <section class="elements">
+      <article class="elements__element">
+        <img class="elements__image" src="images/zJrhrGS__400x400.jpg" />
+        <div class="elements__caption">
+          <h1 class="elements__description">Дио Брандо</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+      <article class="elements__element">
+        <img
+          class="elements__image"
+          src="images/Joseph_Joestar_Infobox_Manga.jpg"
+        />
+        <div class="elements__caption">
+          <h1 class="elements__description">Джозеф</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+      <article class="elements__element">
+        <img class="elements__image" src="images/Kars_Infobox_Manga.jpg" />
+        <div class="elements__caption">
+          <h1 class="elements__description">Карс</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+      <article class="elements__element">
+        <img class="elements__image" src="images/16521838341462763.jpg" />
+        <div class="elements__caption">
+          <h1 class="elements__description">Лиза Лиза</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+      <article class="elements__element">
+        <img
+          class="elements__image"
+          src="images/cfdfff8180e1906eef32de36d59e079a.png"
+        />
+        <div class="elements__caption">
+          <h1 class="elements__description">Джоске</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+      <article class="elements__element">
+        <img class="elements__image" src="images/scale_1200.jpg" />
+        <div class="elements__caption">
+          <h1 class="elements__description">Джотаро</h1>
+          <div class="elements__hearts">
+            <label>
+              <input
+                type="checkbox"
+                class="invisible"
+                name="like"
+                id="like"
+                value="like"
+              />
+              <span class="elements__heart"></span>
+            </label>
+          </div>
+        </div>
+      </article>
+    </section>
+    <footer class="footer">
+      <p class="footer__text">&copy; 2023 Mesto Russia</p>
+    </footer>
+    <div class="popup popup_opened">
+      <div class="popup__container">
+        <div class="popup__close"></div>
+        <h3 class="popup__name">Редактировать профиль</h3>
+        <form class="popup__form" name="profile">
+          <label for="username-input" class="popup__label">
+            <input
+              id="username-input"
+              type="text"
+              class="popup__input"
+              name="username"
+              required
+              placeholder="Ваше имя"
+            />
+          </label>
+          <label for="description-input" class="popup__label">
+            <input
+              id="description-input"
+              type="text"
+              class="popup__input"
+              name="description"
+              required
+              placeholder="Ваш род занятий"
+            />
+          </label>
+          <button type="submit" class="popup__submit" aria-label="Сохранить">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

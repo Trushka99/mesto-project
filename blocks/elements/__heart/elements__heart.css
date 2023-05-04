@@ -1,0 +1,17 @@
+.elements__heart {
+  background-image: url(../../../images/like.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block; /* элемент span теперь сможет принимать определённую ширину и высоту */
+  vertical-align: middle; /* элемент и текст будут правильно выровнены по вертикали. Работает в паре с inline-block */
+  width: 20px;
+  height: 20px; /* размеры */
+  border: none;
+  cursor: pointer;
+}
+.invisible:checked + .elements__heart {
+  background-image: url(../../../images/Union.svg);
+}
+.invisible:hover + .elements__heart {
+  background-image: url(../../../images/LOX.svg);
+}
