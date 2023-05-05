@@ -1,5 +1,15 @@
 .footer {
-    max-width: 880px;
-    margin: 0 auto;
-    margin-bottom: 60px;
+  max-width: 880px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+@media (max-width: 1024px) {
+  .footer {
+    width: 87%;
+  }
+}
+@media (max-width: 767px) {
+  .footer {
+    margin-bottom: 36px;
+  }
 }

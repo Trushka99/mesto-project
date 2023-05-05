@@ -13,3 +13,10 @@
 .profile__rectangle_function_add:hover {
   border-color: grey;
 }
+
+@media (max-width: 767px) {
+  .profile__rectangle_function_add {
+    margin-left: 0;
+    width: 100%;
+  }
+}

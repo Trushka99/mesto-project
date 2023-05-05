@@ -12,21 +12,21 @@
       <img class="header__logo" src="images/Vector.svg" />
     </header>
     <section class="profile">
-      <img class="profile__avatar" src="images/image.png" />
+      <img class="profile__avatar" src="images/Без названия.jpg" />
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__subname">Исследователь океана</p>
+        <h1 class="profile__name">Джорно Джовано</h1>
+        <label class="profile__rectangle profile__rectangle_function_edit">
+          <input
+            type="checkbox"
+            class="invisible"
+            name="edit_button"
+            id="edit__buton"
+            value="edit__button"
+          />
+          <span class="profile__edit-button"></span>
+        </label>
+        <p class="profile__subname">Глава Мафии</p>
       </div>
-      <label class="profile__rectangle profile__rectangle_function_edit">
-        <input
-          type="checkbox"
-          class="invisible"
-          name="edit_button"
-          id="edit__buton"
-          value="edit__button"
-        />
-        <span class="profile__edit-button"></span>
-      </label>
       <label class="profile__rectangle profile__rectangle_function_add">
         <input
           type="checkbox"
@@ -162,26 +162,18 @@
         <div class="popup__close"></div>
         <h3 class="popup__name">Редактировать профиль</h3>
         <form class="popup__form" name="profile">
-          <label for="username-input" class="popup__label">
-            <input
-              id="username-input"
-              type="text"
-              class="popup__input"
-              name="username"
-              required
-              placeholder="Ваше имя"
-            />
-          </label>
-          <label for="description-input" class="popup__label">
-            <input
-              id="description-input"
-              type="text"
-              class="popup__input"
-              name="description"
-              required
-              placeholder="Ваш род занятий"
-            />
-          </label>
+          <input
+            class="popup__input"
+            name="Name"
+            required
+            placeholder="Джорно Джовано"
+          />
+          <input
+            class="popup__input"
+            name="Subname"
+            required
+            placeholder="Глава Мафии"
+          />
           <button type="submit" class="popup__submit" aria-label="Сохранить">
             Сохранить
           </button>

@@ -7,10 +7,19 @@
   align-content: center;
   flex-wrap: wrap;
   cursor: pointer;
-  margin-top: -3.3%;
   margin-left: 18px;
+  margin-top: 3%;
   box-sizing: border-box;
 }
 .profile__rectangle_function_edit:hover {
   border-color: grey;
+}
+@media (max-width: 767px) {
+  .profile__rectangle_function_edit {
+    width: 18px;
+    height: 18px;
+    margin:0;
+    margin-top: 3%;
+
+  }
 }

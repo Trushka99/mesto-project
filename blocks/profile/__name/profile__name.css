@@ -5,4 +5,20 @@
   font-weight: 500;
   line-height: 48px;
   letter-spacing: 0em;
+  flex-basis: 35%;
+}
+@media (max-width: 1023px) {
+  .profile__name {
+    flex-basis: 73%;
+  }
+}
+@media (max-width: 767px) {
+  .profile__name {
+    flex-basis: 86%;
+    font-size: 27px;
+    line-height: 33px;
+    text-align: right;
+    margin-bottom: 14px;
+
+  }
 }

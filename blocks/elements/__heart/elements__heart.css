@@ -10,8 +10,8 @@
   cursor: pointer;
 }
 .invisible:checked + .elements__heart {
-  background-image: url(../../../images/Union.svg);
+  background-image: url(../../../images/heart-active.svg);
 }
 .invisible:hover + .elements__heart {
-  background-image: url(../../../images/LOX.svg);
+  background-image: url(../../../images/heart-hover.svg);
 }
