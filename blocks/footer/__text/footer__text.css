@@ -6,3 +6,9 @@
   color: rgba(84, 84, 84, 1);
   margin: 0;
 }
+@media (max-width: 767px) {
+  .footer__text {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

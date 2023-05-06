@@ -5,20 +5,20 @@
   font-weight: 500;
   line-height: 48px;
   letter-spacing: 0em;
-  flex-basis: 35%;
+  text-overflow: ellipsis;
+  white-space: wrap;
 }
 @media (max-width: 1023px) {
   .profile__name {
-    flex-basis: 73%;
+    flex-basis: 50%;
   }
 }
 @media (max-width: 767px) {
   .profile__name {
-    flex-basis: 86%;
     font-size: 27px;
     line-height: 33px;
-    text-align: right;
+    text-align: center;
     margin-bottom: 14px;
-
+    margin-right: 10px;
   }
 }

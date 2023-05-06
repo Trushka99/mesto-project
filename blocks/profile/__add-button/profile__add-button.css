@@ -1,14 +1,10 @@
 .profile__add-button {
-    width: 22px;
-    height: 22px;
-    background-image: url(../../../images/add__button.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: inline-block; /* элемент span теперь сможет принимать определённую ширину и высоту */
-    vertical-align: middle; /* элемент и текст будут правильно выровнены по вертикали. Работает в паре с inline-block */
-    border: none;
+    object-fit: contain;
+    z-index: 0;
 }
-
-.invisible:hover + .profile__add-button {
-    opacity: 0.6;;
+@media (max-width: 767px) {
+    .profile__add-button {
+        height: 16px;
+        width: 16px;
+    }
 }

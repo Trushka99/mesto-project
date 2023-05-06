@@ -9,14 +9,18 @@
   align-content: center;
   flex-wrap: wrap;
   cursor: pointer;
+  background: transparent;
+  z-index: 1;
 }
 .profile__rectangle_function_add:hover {
-  border-color: grey;
+  opacity: 0.6;
 }
 
 @media (max-width: 767px) {
   .profile__rectangle_function_add {
     margin-left: 0;
     width: 100%;
+    box-sizing: content-box;
+    padding:0;
   }
 }

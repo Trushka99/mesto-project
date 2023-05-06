@@ -1,9 +1,12 @@
 .header__logo {
-    object-fit: contain;
-    padding-bottom: 41px;
+  object-fit: contain;
+  padding-bottom: 41px;
 }
 @media (max-width: 767px) {
-    .header__logo {
-        padding-bottom: 31.6px;
-    }
+  .header__logo {
+    padding-bottom: 31.6px;
+    margin-left: 27px;
+    Width: 103.74px;
+    Height: 24.4px;
+  }
 }

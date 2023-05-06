@@ -4,7 +4,10 @@
   font-weight: normal;
   line-height: 22px;
   letter-spacing: 0em;
-  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width:100%;
 }
 
 @media (max-width: 767px) {
