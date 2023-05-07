@@ -19,26 +19,23 @@
       <section class="profile">
         <img
           class="profile__avatar"
-          src="images/Без названия.jpg"
+          src="images/ДЖОРНО.jpg"
           alt="Аватар профиля пользователя"
         />
         <div class="profile__info">
           <h1 class="profile__name">Джорно</h1>
-            <button
-              type="button"
-              class="profile__rectangle_function_edit"
-              aria-label="Редактировать"
-            >
-              <img class="profile__edit-button" src="images/edit.svg" />
-            </button>
+          <button
+            type="button"
+            class="profile__edit-button"
+            aria-label="Редактировать"
+          ></button>
           <p class="profile__subname">Глава Мафии</p>
         </div>
-        <button type="button" class="profile__rectangle_function_add" aria-label="Добавить">
-          <img
-            class="profile__add-button"
-            src="images/add__button.svg"
-          />
-        </button>
+        <button
+          type="button"
+          class="profile__add-button"
+          aria-label="Добавить"
+        ></button>
       </section>
       <section class="elements">
         <article class="elements__element">
@@ -49,13 +46,11 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Дио Брандо</h2>
-                <button
-                  type="button"
-                  class="elements__hearts"
-                  aria-label="Нравится"
-                  >
-                <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-                </button>
+            <button
+              type="button"
+              class="elements__heart"
+              aria-label="Нравится"
+            ></button>
           </div>
         </article>
         <article class="elements__element">
@@ -66,15 +61,11 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Джозеф</h2>
-            <div class="elements__hearts">
-              <button
+            <button
               type="button"
-              class="elements__hearts"
+              class="elements__heart"
               aria-label="Нравится"
-              >
-            <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-            </button>
-            </div>
+            ></button>
           </div>
         </article>
         <article class="elements__element">
@@ -85,15 +76,11 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Карс</h2>
-            <div class="elements__hearts">
-              <button
+            <button
               type="button"
-              class="elements__hearts"
-              aria-label="Нравится" 
-              >
-            <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-            </button>
-            </div>
+              class="elements__heart"
+              aria-label="Нравится"
+            ></button>
           </div>
         </article>
         <article class="elements__element">
@@ -104,15 +91,11 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Лиза Лиза</h2>
-            <div class="elements__hearts">
-              <button
+            <button
               type="button"
-              class="elements__hearts"
+              class="elements__heart"
               aria-label="Нравится"
-              >
-            <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-            </button>
-            </div>
+            ></button>
           </div>
         </article>
         <article class="elements__element">
@@ -123,15 +106,11 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Джоске</h2>
-            <div class="elements__hearts">
-              <button
+            <button
               type="button"
-              class="elements__hearts"
+              class="elements__heart"
               aria-label="Нравится"
-              >
-            <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-            </button>
-            </div>
+            ></button>
           </div>
         </article>
         <article class="elements__element">
@@ -142,25 +121,25 @@
           />
           <div class="elements__caption">
             <h2 class="elements__description">Джотаро</h2>
-            <div class="elements__hearts">
-              <button
+            <button
               type="button"
-              class="elements__hearts"
+              class="elements__heart"
               aria-label="Нравится"
-              >
-            <img class="elements__heart" src="images/heart.svg" alt="кнопка лайка"></span>
-            </button>
-            </div>
+            ></button>
           </div>
         </article>
       </section>
     </main>
     <footer class="footer">
-      <p class="footer__text">&copy; 2023 Mesto Russia</p>
+      <p class="footer__text">&copy; 2023 Mestso Russia</p>
     </footer>
     <div class="popup popup_opened">
       <div class="popup__container">
-        <div class="popup__close"></div>
+        <button
+          type="button"
+          class="popup__close"
+          aria-label="закрыть"
+        ></button>
         <h3 class="popup__name">Редактировать профиль</h3>
         <form class="popup__form" name="profile">
           <input

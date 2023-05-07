@@ -6,12 +6,9 @@
   line-height: 48px;
   letter-spacing: 0em;
   text-overflow: ellipsis;
-  white-space: wrap;
-}
-@media (max-width: 1023px) {
-  .profile__name {
-    flex-basis: 50%;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 294px;
 }
 @media (max-width: 767px) {
   .profile__name {
