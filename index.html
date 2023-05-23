@@ -41,81 +41,6 @@
         <article class="elements__element">
           <img
             class="elements__image"
-            src="images/zJrhrGS__400x400.jpg"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Дио Брандо</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
-        <article class="elements__element">
-          <img
-            class="elements__image"
-            src="images/Joseph_Joestar_Infobox_Manga.jpg"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Джозеф</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
-        <article class="elements__element">
-          <img
-            class="elements__image"
-            src="images/Kars_Infobox_Manga.jpg"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Карс</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
-        <article class="elements__element">
-          <img
-            class="elements__image"
-            src="images/16521838341462763.jpg"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Лиза Лиза</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
-        <article class="elements__element">
-          <img
-            class="elements__image"
-            src="images/cfdfff8180e1906eef32de36d59e079a.png"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Джоске</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
-        <article class="elements__element">
-          <img
-            class="elements__image"
             src="images/scale_1200.jpg"
             alt="Фотография опубликованная пользователем"
           />
@@ -128,12 +53,30 @@
             ></button>
           </div>
         </article>
+        <template id="place-template">
+          <article class="elements__element">
+            <img
+              class="elements__image"
+              src=""
+              alt="Фотография опубликованная пользователем"
+            />
+            <div class="elements__caption">
+              <h2 class="elements__description"></h2>
+              <button
+                type="button"
+                class="elements__heart"
+                aria-label="Нравится"
+              ></button>
+            </div>
+          </article>
+        </template>
+    
       </section>
     </main>
     <footer class="footer">
       <p class="footer__text">&copy; 2023 Mestso Russia</p>
     </footer>
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__container">
         <button
           type="button"
@@ -162,5 +105,36 @@
         </form>
       </div>
     </div>
+    <div class="popup" id="popup-add">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="popup__close"
+          id="close-2"
+          aria-label="закрыть"
+        ></button>
+        <h3 class="popup__name">Новое место</h3>
+        <form class="popup__form" name="profile">
+          <input
+            type="text"
+            class="popup__input popup__input_name"
+            name="Name"
+            required
+            placeholder="Название"
+          />
+          <input
+            type="text"
+            class="popup__input popup__input_picture"
+            name="Subname"
+            required
+            placeholder="Ссылка на картинку"
+          />
+          <button type="submit" class="popup__submit" aria-label="создать">
+            Создать
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
