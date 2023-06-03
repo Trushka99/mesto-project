@@ -121,15 +121,15 @@ function handleFormadd() {
   popupadd.classList.remove("popup_opened");
   title.value = "";
   image.value = "";
-  const like = document.querySelector(".elements__heart");
+  const like = cardsElement.querySelector(".elements__heart");
   like.addEventListener("click", function (evt) {
     evt.target.classList.toggle("elements__heart_status_active");
   });
-  const deleteButton = document.querySelector(".elements__delete");
-  deleteButton.addEventListener("click", () => {
-    const element = document.querySelector(".elements__element");
+  let deleteButton = cardsElement.querySelector(".elements__delete");
+  deleteButton.addEventListener("click", (function() {
+    const element = deleteButton.parentElement;
     element.remove();
-  });
+  }));
   const image2 = document.querySelectorAll(".elements__image");
   image2.forEach(function (item) {
     item.addEventListener("click", (e) => {
@@ -158,8 +158,8 @@ like.forEach(function (item) {
 // Удаление карточки
 const deleteButton = document.querySelectorAll(".elements__delete");
 deleteButton.forEach(function (item) {
-  item.addEventListener("click", () => {
-    const element = document.querySelector(".elements__element");
+  item.addEventListener("click", (e) => {
+    const element = e.currentTarget.parentElement;
     element.remove();
   });
 });
