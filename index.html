@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
     <title>Mesto</title>
+    <script defer src="script.js"></script>
   </head>
   <body class="page">
     <header class="header">
@@ -38,21 +39,6 @@
         ></button>
       </section>
       <section class="elements">
-        <article class="elements__element">
-          <img
-            class="elements__image"
-            src="images/scale_1200.jpg"
-            alt="Фотография опубликованная пользователем"
-          />
-          <div class="elements__caption">
-            <h2 class="elements__description">Джотаро</h2>
-            <button
-              type="button"
-              class="elements__heart"
-              aria-label="Нравится"
-            ></button>
-          </div>
-        </article>
         <template id="place-template">
           <article class="elements__element">
             <img
@@ -60,6 +46,11 @@
               src=""
               alt="Фотография опубликованная пользователем"
             />
+            <button
+              type="button"
+              class="elements__delete"
+              aria-label="удалить"
+            ></button>
             <div class="elements__caption">
               <h2 class="elements__description"></h2>
               <button
@@ -70,7 +61,6 @@
             </div>
           </article>
         </template>
-    
       </section>
     </main>
     <footer class="footer">
@@ -88,6 +78,7 @@
           <input
             type="text"
             class="popup__input"
+            id="popup_name"
             name="Name"
             required
             placeholder="Ваше Имя"
@@ -95,6 +86,7 @@
           <input
             type="text"
             class="popup__input"
+            id="popup_job"
             name="Subname"
             required
             placeholder="Сфера Деятельности"
@@ -105,11 +97,11 @@
         </form>
       </div>
     </div>
-    <div class="popup" id="popup-add">
+    <div class="popup popup_function_add">
       <div class="popup__container">
         <button
           type="button"
-          class="popup__close"
+          class="popup__close popup__close_function_add"
           id="close-2"
           aria-label="закрыть"
         ></button>
@@ -129,12 +121,31 @@
             required
             placeholder="Ссылка на картинку"
           />
-          <button type="submit" class="popup__submit" aria-label="создать">
+          <button
+            type="submit"
+            class="popup__submit popup__submit_function_add"
+            aria-label="создать"
+          >
             Создать
           </button>
         </form>
       </div>
     </div>
-    <script src="script.js"></script>
+    <div class="popup" id="image_zoom">
+      <div class="popup__container_type_image">
+        <button
+          type="button"
+          class="popup__close_position_image"
+          id="close-2"
+          aria-label="закрыть"
+        ></button>
+        <img
+          class="popup__image"
+          src=""
+          alt="Фотография опубликованная пользователем"
+        />
+        <h3 class="popup__image-name"></h3>
+      </div>
+    </div>
   </body>
 </html>
