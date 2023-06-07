@@ -119,10 +119,10 @@ function createCard(element) {
 // Добавление карточки и реализация остальных функций на новых элементах
 function handleFormAdd(event) { 
   event.preventDefault(); 
-  event.name = newcardName.value; 
-  event.link = newcardImage.value; 
-  event.alt = newcardName.value;
-  const placeElement = createCard(event);
+  const item = {}
+  item.name = newcardName.value; 
+  item.link = newcardImage.value; 
+  const placeElement = createCard(item);
   placesContainer.prepend(placeElement); 
   closePopup(profileAddPopup); 
   newcardName.value = ""; 
