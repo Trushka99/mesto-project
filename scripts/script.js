@@ -117,16 +117,116 @@ function createCard(element) {
 }
 
 // Добавление карточки и реализация остальных функций на новых элементах
-function handleFormAdd(event) { 
-  event.preventDefault(); 
-  const item = {}
-  item.name = newcardName.value; 
-  item.link = newcardImage.value; 
+function handleFormAdd(event) {
+  event.preventDefault();
+  const item = {};
+  item.name = newcardName.value;
+  item.link = newcardImage.value;
   const placeElement = createCard(item);
-  placesContainer.prepend(placeElement); 
-  closePopup(profileAddPopup); 
-  newcardName.value = ""; 
-  newcardImage.value = ""; 
-
+  placesContainer.prepend(placeElement);
+  closePopup(profileAddPopup);
+  newcardName.value = "";
+  newcardImage.value = "";
 }
 cardForm.addEventListener("submit", handleFormAdd);
+
+// const formElement = document.querySelector('.popup__form_add');
+// const formInput = formElement.querySelector('.popup__input_name');
+// const formError = formElement.querySelector(`.${formInput.id}-error`);
+// // Передадим текст ошибки вторым параметром
+// const showInputError = (element, errorMessage) => {
+//   element.classList.add('form__input_type_error');
+//   // Заменим содержимое span с ошибкой на переданный параметр
+//   if (formInput.validity.patternMismatch) {
+//     formError.textContent="Любая буква русского и латинского алфавита.."
+//   }
+//   else {formError.textContent = errorMessage;}
+//   formError.classList.add('cardname-input-error');
+// };
+
+// const hideInputError = (element) => {
+//   element.classList.remove('form__input_type_error');
+//   formError.classList.remove('cardname-input-error');
+//   // Очистим ошибку
+//   formError.textContent = '';
+// };
+
+// const isValid = () => {
+//   if (!formInput.validity.valid) {
+//     // Передадим сообщение об ошибке вторым аргументом
+//     showInputError(formInput, formInput.validationMessage);
+//   }
+//     else {
+//     hideInputError(formInput);
+//   }
+// };
+
+// formInput.addEventListener('input', isValid);
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("form__input_type_error");
+  if (inputElement.validity.patternMismatch) {
+    errorElement.textContent = "Любая буква русского и латинского алфавита..";
+  } else {
+    errorElement.textContent = errorMessage;
+  }
+  errorElement.classList.add("cardname-input-error");
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("cardname-input-error");
+  errorElement.textContent = "";
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("button_inactive");
+  } else {
+    buttonElement.classList.remove("button_inactive");
+    buttonElement.disabled = false
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
+  const buttonElement = formElement.querySelector(".popup__submit");
+
+  // чтобы проверить состояние кнопки в самом начале
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement);
+      // чтобы проверять его при изменении любого из полей
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".popup__form"));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+    formList.forEach((fieldSet) => {
+      setEventListeners(fieldSet);
+    });
+  });
+};
+
+enableValidation();

@@ -74,7 +74,7 @@
           aria-label="закрыть"
         ></button>
         <h3 class="popup__name">Редактировать профиль</h3>
-        <form class="popup__form popup__form_redact" name="profile">
+        <form class="popup__form popup__form_redact" name="profile" novalidate>
           <input
             type="text"
             class="popup__input"
@@ -82,7 +82,11 @@
             name="Name"
             required
             placeholder="Ваше Имя"
+            minlength="2"
+            maxlength="40"
+            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
           />
+          <span class="popup_name-error form__input-error"></span>
           <input
             type="text"
             class="popup__input"
@@ -90,7 +94,11 @@
             name="Subname"
             required
             placeholder="Сфера Деятельности"
+            minlength="2"
+            maxlength="200"
+            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
           />
+          <span class="popup_job-error form__input-error"></span>
           <button type="submit" class="popup__submit" aria-label="Сохранить">
             Сохранить
           </button>
@@ -106,25 +114,37 @@
           aria-label="закрыть"
         ></button>
         <h3 class="popup__name">Новое место</h3>
-        <form class="popup__form popup__form_add" name="profile">
+        <form class="popup__form popup__form_add" name="profile" novalidate>
           <input
             type="text"
             class="popup__input popup__input_name"
+            id="cardname-input"
             name="Name"
             required
             placeholder="Название"
+            required
+            minlength="2"
+            maxlength="30"
+            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
           />
+          <span class="cardname-input-error form__input-error"></span>
+
           <input
-            type="text"
+            type="url"
             class="popup__input popup__input_picture"
             name="Subname"
+            id="cardimage-input"
             required
             placeholder="Ссылка на картинку"
+            required
           />
+          <span class="cardimage-input-error form__input-error"></span>
+
           <button
             type="submit"
             class="popup__submit popup__submit_function_add"
             aria-label="создать"
+            disabled
           >
             Создать
           </button>

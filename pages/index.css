@@ -32,3 +32,7 @@
 @import url(../blocks/popup/__container/_type/popup__container_type_image.css);
 @import url(../blocks/popup/__close/_position/popup__close_position_image.css);
 @import url(../blocks/popup/__image-name/popup__image-name.css);
+@import url(../button_inactive.css);
+@import url(../form__input_type_error.css);
+@import url(../cardname-input-error.css);
+@import url(../form__input-error.css);
