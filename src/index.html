@@ -4,15 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/index.css" />
     <title>Mesto</title>
-    <script defer src="scripts/script.js"></script>
   </head>
   <body class="page">
     <header class="header">
       <img
         class="header__logo"
-        src="images/Vector.svg"
+        src="../src/images/Vector.svg"
         alt="Лого сайта Место"
       />
     </header>
@@ -20,7 +18,7 @@
       <section class="profile">
         <img
           class="profile__avatar"
-          src="images/ДЖОРНО.jpg"
+          src="../src/images/ДЖОРНО.jpg"
           alt="Аватар профиля пользователя"
         />
         <div class="profile__info">
@@ -75,31 +73,41 @@
         ></button>
         <h3 class="popup__name">Редактировать профиль</h3>
         <form class="popup__form popup__form_redact" name="profile" novalidate>
-          <input
-            type="text"
-            class="popup__input"
-            id="popup_name"
-            name="Name"
-            required
-            placeholder="Ваше Имя"
-            minlength="2"
-            maxlength="40"
-            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
-          />
-          <span class="popup_name-error form__input-error"></span>
-          <input
-            type="text"
-            class="popup__input"
-            id="popup_job"
-            name="Subname"
-            required
-            placeholder="Сфера Деятельности"
-            minlength="2"
-            maxlength="200"
-            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
-          />
-          <span class="popup_job-error form__input-error"></span>
-          <button type="submit" class="popup__submit" aria-label="Сохранить">
+          <label class="popup__label">
+            <input
+              type="text"
+              class="popup__input"
+              id="popup_name"
+              name="Name"
+              required
+              placeholder="Ваше Имя"
+              minlength="2"
+              maxlength="40"
+              pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+            />
+            <span class="popup_name-error form__input-error"></span>
+          </label>
+          <label class="popup__label">
+            <input
+              type="text"
+              class="popup__input"
+              id="popup_job"
+              name="Subname"
+              required
+              placeholder="Сфера Деятельности"
+              minlength="2"
+              maxlength="200"
+              pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+            />
+            <span class="popup_job-error form__input-error"></span>
+          </label>
+          <button
+            type="submit"
+            class="popup__submit"
+            aria-label="Сохранить"
+            disabled
+          >
             Сохранить
           </button>
         </form>
@@ -115,30 +123,34 @@
         ></button>
         <h3 class="popup__name">Новое место</h3>
         <form class="popup__form popup__form_add" name="profile" novalidate>
-          <input
-            type="text"
-            class="popup__input popup__input_name"
-            id="cardname-input"
-            name="Name"
-            required
-            placeholder="Название"
-            required
-            minlength="2"
-            maxlength="30"
-            pattern="^[A-Za-zА-Яа-яЁё\s]+$"
-          />
-          <span class="cardname-input-error form__input-error"></span>
-
-          <input
-            type="url"
-            class="popup__input popup__input_picture"
-            name="Subname"
-            id="cardimage-input"
-            required
-            placeholder="Ссылка на картинку"
-            required
-          />
-          <span class="cardimage-input-error form__input-error"></span>
+          <label class="popup__label">
+            <input
+              type="text"
+              class="popup__input popup__input_name"
+              id="cardname-input"
+              name="Name"
+              required
+              placeholder="Название"
+              required
+              minlength="2"
+              maxlength="30"
+              pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+            />
+            <span class="cardname-input-error popup__input_error"></span>
+          </label>
+          <label class="popup__label">
+            <input
+              type="url"
+              class="popup__input popup__input_picture"
+              name="Subname"
+              id="cardimage-input"
+              required
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="cardimage-input-error form__input-error"></span>
+          </label>
 
           <button
             type="submit"

@@ -4,6 +4,7 @@
   width: 430px;
   border-radius: 10px;
   position: relative;
+  z-index: 3;
 }
 @media (max-width: 767px) {
   .popup__container {
