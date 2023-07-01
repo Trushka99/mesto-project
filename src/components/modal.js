@@ -19,7 +19,7 @@ function closePopup(popup) {
 }
 
 function buttonClosePopup (e) {
-  var key = e.keyCode;
+  const key = e.keyCode;
   popups.forEach(function (popup) {
     if (key == 27) {
       closePopup(popup);

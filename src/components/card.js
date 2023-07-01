@@ -7,6 +7,7 @@ import {
   profileZoomedImageCaption,
   placesContainer,
   placeTemplate,
+  cardForm
 } from "./utils";
 
 import { openPopup, closePopup } from "./modal";
@@ -39,7 +40,7 @@ function createCard(element) {
 
   return cardElement;
 }
-
+import {enableValidation} from './validate'
 function handleFormAdd(event) {
   event.preventDefault();
   const item = {};
@@ -48,7 +49,7 @@ function handleFormAdd(event) {
   const placeElement = createCard(item);
   placesContainer.prepend(placeElement);
   closePopup(profileAddPopup);
-  newcardName.value = "";
-  newcardImage.value = "";
+  cardForm.reset()
+  enableValidation()
 }
 export { createCard, handleFormAdd };

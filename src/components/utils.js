@@ -64,5 +64,5 @@ export {
   placesContainer,
   placeTemplate,
   popups,
-  closeButtons
+  closeButtons,
 };
