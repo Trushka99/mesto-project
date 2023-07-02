@@ -51,7 +51,7 @@ import {
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
-enableValidation('.popup__form', {
+enableValidation( {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',

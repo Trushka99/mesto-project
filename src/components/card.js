@@ -50,6 +50,13 @@ function handleFormAdd(event) {
   placesContainer.prepend(placeElement);
   closePopup(profileAddPopup);
   cardForm.reset()
-  enableValidation('.popup__form')
+  enableValidation( {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input_error'
+  }); 
 }
 export { createCard, handleFormAdd };
