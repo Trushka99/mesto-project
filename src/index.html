@@ -10,7 +10,7 @@
     <header class="header">
       <img
         class="header__logo"
-        src="../src/images/Vector.svg"
+        src="./images/Vector.svg"
         alt="Лого сайта Место"
       />
     </header>
@@ -18,7 +18,7 @@
       <section class="profile">
         <img
           class="profile__avatar"
-          src="../src/images/ДЖОРНО.jpg"
+          src="./images/ДЖОРНО.jpg"
           alt="Аватар профиля пользователя"
         />
         <div class="profile__info">
@@ -99,6 +99,7 @@
               minlength="2"
               maxlength="200"
               pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
             />
             <span class="popup_job-error form__input-error"></span>
           </label>

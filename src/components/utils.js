@@ -2,27 +2,27 @@
 const initialcards = [
   {
     name: "Дио Брандо",
-    link: "../src/images/zJrhrGS__400x400.jpg",
+    link: "../images/zJrhrGS__400x400.jpg",
   },
   {
     name: "Джозеф",
-    link: "../src/images/joseph.jpg",
+    link: "../images/joseph.jpg",
   },
   {
     name: "Карс",
-    link: "../src/images/Kars_Infobox_Manga.jpg",
+    link: "../images/Kars_Infobox_Manga.jpg",
   },
   {
     name: "Лиза Лиза",
-    link: "../src/images/16521838341462763.jpg",
+    link: "../images//16521838341462763.jpg",
   },
   {
     name: "Джоске",
-    link: "../src/images/josuke.png",
+    link: "../images/josuke.png",
   },
   {
     name: "Джотаро",
-    link: "../src/images/jotaro.jpg",
+    link: "../images/jotaro.jpg",
   },
 ];
 const profileEditButton = document.querySelector(".profile__edit-button");

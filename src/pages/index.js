@@ -43,9 +43,19 @@ import { createCard, handleFormAdd } from "../components/card.js";
 cardForm.addEventListener("submit", handleFormAdd);
 
 import {
-  enableValidation,
+  enableValidation
 } from "../components/validate.js";
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
-enableValidation();
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+enableValidation('.popup__form', {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input_error'
+}); 

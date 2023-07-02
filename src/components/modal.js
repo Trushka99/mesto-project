@@ -1,5 +1,5 @@
-import { profileInfoPopup, profileAddPopup,popups } from "./utils";
-
+import { profileInfoPopup, profileAddPopup,popups,profileForm } from "./utils";
+import {hideInputError} from './validate'
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.body.addEventListener("keyup",buttonClosePopup)
@@ -9,6 +9,10 @@ function openPopupEdit() {
   openPopup(profileInfoPopup);
   profileEditName.value = profileName.textContent;
   profileEditJob.value = profileJob.textContent;
+  const input = profileInfoPopup.querySelectorAll('.popup__input')
+  input.forEach((input) => {
+    hideInputError(profileForm,input )
+  })
 }
 function openPopupAdd() {
   openPopup(profileAddPopup);
@@ -21,7 +25,7 @@ function closePopup(popup) {
 function buttonClosePopup (e) {
   const key = e.keyCode;
   popups.forEach(function (popup) {
-    if (key == 27) {
+    if (key == 27 && popup.classList.contains('popup_opened')) {
       closePopup(popup);
     }
   });

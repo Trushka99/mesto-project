@@ -50,6 +50,6 @@ function handleFormAdd(event) {
   placesContainer.prepend(placeElement);
   closePopup(profileAddPopup);
   cardForm.reset()
-  enableValidation()
+  enableValidation('.popup__form')
 }
 export { createCard, handleFormAdd };
