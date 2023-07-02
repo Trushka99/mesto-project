@@ -7,7 +7,8 @@ import {
   profileZoomedImageCaption,
   placesContainer,
   placeTemplate,
-  cardForm
+  cardForm,
+  popupSubmitAdd
 } from "./utils";
 
 import { openPopup, closePopup } from "./modal";
@@ -40,7 +41,7 @@ function createCard(element) {
 
   return cardElement;
 }
-import {enableValidation} from './validate'
+import {buttonStateDisabled} from './validate'
 function handleFormAdd(event) {
   event.preventDefault();
   const item = {};
@@ -50,13 +51,6 @@ function handleFormAdd(event) {
   placesContainer.prepend(placeElement);
   closePopup(profileAddPopup);
   cardForm.reset()
-  enableValidation( {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input_error'
-  }); 
+  buttonStateDisabled(popupSubmitAdd, 'popup__submit_inactive' )
 }
 export { createCard, handleFormAdd };

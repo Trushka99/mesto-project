@@ -1,5 +1,5 @@
-import { profileInfoPopup, profileAddPopup,popups,profileForm } from "./utils";
-import {hideInputError} from './validate'
+import { profileInfoPopup, profileAddPopup,popups,profileForm,profileEditName, profileEditJob, profileName, profileJob, popupSubmitEdit} from "./utils";
+import {hideInputError, buttonStateDisabled} from './validate'
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.body.addEventListener("keyup",buttonClosePopup)
@@ -44,15 +44,12 @@ function popupOverlay(item, el) {
   }
 }
 
-const profileEditName = document.querySelector("#popup_name");
-const profileEditJob = document.querySelector("#popup_job");
-const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector(".profile__subname");
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = profileEditName.value;
   profileJob.textContent = profileEditJob.value;
   closePopup(profileInfoPopup);
+  buttonStateDisabled(popupSubmitEdit, 'popup__submit_inactive')
 }
 
 export {
