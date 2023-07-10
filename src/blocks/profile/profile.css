@@ -6,6 +6,7 @@
   margin: 0 auto;
   margin-bottom: 50px;
   margin-top: 40px;
+  position: relative;
 }
 @media (max-width: 1023px) {
   .profile {

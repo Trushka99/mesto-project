@@ -1,30 +1,3 @@
-// Данные массива
-const initialcards = [
-  {
-    name: "Дио Брандо",
-    link: "./images/zJrhrGS__400x400.jpg",
-  },
-  {
-    name: "Джозеф",
-    link: "./images/joseph.jpg",
-  },
-  {
-    name: "Карс",
-    link: "./images/Kars_Infobox_Manga.jpg",
-  },
-  {
-    name: "Лиза Лиза",
-    link: "./images//16521838341462763.jpg",
-  },
-  {
-    name: "Джоске",
-    link: "./images/josuke.png",
-  },
-  {
-    name: "Джотаро",
-    link: "./images/jotaro.jpg",
-  },
-];
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileInfoPopup = document.querySelector(".popup_function_edit");
@@ -44,10 +17,15 @@ const placesContainer = document.querySelector(".elements");
 const placeTemplate = document.querySelector("#place-template").content;
 const popups = document.querySelectorAll(".popup");
 const closeButtons = document.querySelectorAll(".popup__close");
-const popupSubmitAdd = document.querySelector('.popup__submit_function_add')
-const popupSubmitEdit = document.querySelector('.popup__submit_function_edit')
+const popupSubmitAdd = document.querySelector(".popup__submit_function_add");
+const popupSubmitEdit = document.querySelector(".popup__submit_function_edit");
+const avatarInput = document.querySelector("#popup_avatar");
+const avatarPic = document.querySelector(".profile__avatar");
+const overlayPic = document.querySelector(".profile__avatar_hover");
+const avatarForm = document.querySelector(".popup__form_avatar");
+const popupSubmitAvatar = document.querySelector('.popup__submit_avatar')
+
 export {
-  initialcards,
   profileEditButton,
   profileAddButton,
   profileInfoPopup,
@@ -68,5 +46,10 @@ export {
   popups,
   closeButtons,
   popupSubmitAdd,
-  popupSubmitEdit
+  popupSubmitEdit,
+  avatarInput,
+  avatarPic,
+  overlayPic,
+  avatarForm,
+  popupSubmitAvatar
 };

@@ -16,19 +16,16 @@
     </header>
     <main>
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src="./images/ДЖОРНО.jpg"
-          alt="Аватар профиля пользователя"
-        />
+        <img class="profile__avatar" src="" alt="Аватар профиля пользователя" />
+        <img class="profile__avatar_hover" src="images/AvatarEdit.png" />
         <div class="profile__info">
-          <h1 class="profile__name">Джорно</h1>
+          <h1 class="profile__name"></h1>
           <button
             type="button"
             class="profile__edit-button"
             aria-label="Редактировать"
           ></button>
-          <p class="profile__subname">Глава Мафии</p>
+          <p class="profile__subname"></p>
         </div>
         <button
           type="button"
@@ -57,6 +54,7 @@
                 aria-label="Нравится"
               ></button>
             </div>
+            <p class="elements__heart-count"></p>
           </article>
         </template>
       </section>
@@ -72,7 +70,13 @@
           aria-label="закрыть"
         ></button>
         <h3 class="popup__name">Редактировать профиль</h3>
-        <form class="popup__form popup__form_redact" name="profile" novalidate>
+        <form
+          class="popup__form popup__form_redact"
+          action="https://nomoreparties.co/v1/plus-cohort-26/users/me"
+          method="POST"
+          name="profile"
+          novalidate
+        >
           <label class="popup__label">
             <input
               type="text"
@@ -178,6 +182,38 @@
           alt="Фотография опубликованная пользователем"
         />
         <h3 class="popup__image-name"></h3>
+      </div>
+    </div>
+    <div class="popup popup_function_avatar">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="popup__close"
+          aria-label="закрыть"
+        ></button>
+        <h3 class="popup__name">Обновить аватар</h3>
+        <form class="popup__form popup__form_avatar" name="profile" novalidate>
+          <label class="popup__label">
+            <input
+              type="url"
+              class="popup__input"
+              id="popup_avatar"
+              name="Subname"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="popup_avatar-error form__input-error"></span>
+          </label>
+          <button
+            type="submit"
+            class="popup__submit popup__submit_avatar"
+            aria-label="Сохранить"
+            disabled
+          >
+            Сохранить
+          </button>
+        </form>
       </div>
     </div>
   </body>

@@ -21,13 +21,13 @@
 - Реализована возможность добавления/удаления новых карточек
 - Открытие попапа с увеличенным изображением
 - Возоможность изменения информации в профиле
-- 
+
+Все данные берутся и меняются с сервера с помощью запросов GET,POST,PUT,PATCH.
 **Figma**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
 **Githap Page**
 
-* Ссылка на live сайт:  https://trushka99.github.io/mesto-project/
+* Ссылка на live сайт: https://trushka99.github.io/mesto-project/
 * ![image](https://github.com/Trushka99/mesto-project/assets/129888336/35e6db34-1b13-4ed6-b996-cef430098cfb)
 
