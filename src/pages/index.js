@@ -10,35 +10,111 @@ import {
   profileJob,
   avatarPic,
   overlayPic,
-  avatarForm
+  avatarForm,
+  profileEditName,
+  profileEditJob,
+  profileInfoPopup,
+  popupSubmitEdit,
+  avatarInput,
+  popupSubmitAvatar,
+  avatarPopup,
+  newcardImage,
+  newcardName,
+  profileAddPopup,
+  popupSubmitAdd,
 } from "../components/utils.js";
-import { getInitialCards, initialProfile } from "../components/api.js";
-initialProfile(profileName, profileJob, avatarPic)
-
-avatarPic.onmouseover = function () {
-  overlayPic.classList.add("profile__avatar_hover_active");
-};
-avatarPic.onmouseout = function () {
-  overlayPic.classList.remove("profile__avatar_hover_active");
-};
-
-import "./index.css";
-// Открытие попапа для редактирования профиля и добавляения карточки
 import {
-  openPopupEdit,
-  openPopupAdd,
-  handleProfileFormSubmit,
+  getInitialCards,
+  initialProfile,
+  editProfile,
+  renderLoading,
+  editavatar,
+  addCard,
+} from "../components/api.js";
+import "./index.css";
+import {
   closePopupButton,
   popupOverlay,
   openPopup,
-  editAvatar
+  closePopup,
 } from "../components/modal.js";
+import { createCard } from "../components/card.js";
+import {
+  enableValidation,
+  hideInputError,
+  buttonStateDisabled,
+} from "../components/validate.js";
 
-function openPopupAvatar() {
-  openPopup(document.querySelector(".popup_function_avatar"));
+function openPopupEdit() {
+  openPopup(profileInfoPopup);
+  profileEditName.value = profileName.textContent;
+  profileEditJob.value = profileJob.textContent;
+  const input = profileInfoPopup.querySelectorAll(".popup__input");
+  input.forEach((input) => {
+    hideInputError(profileForm, input);
+  });
+}
+function openPopupAdd() {
+  openPopup(profileAddPopup);
 }
 
-avatarPic.addEventListener("click", openPopupAvatar);
+function handleProfileFormSubmit() {
+  renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
+  editProfile(profileEditName, profileEditJob)
+    .then(
+      (profileName.textContent = profileEditName.value),
+      (profileJob.textContent = profileEditJob.value)
+    )
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
+      closePopup(profileInfoPopup);
+    });
+
+  buttonStateDisabled(popupSubmitEdit, "popup__submit_inactive");
+}
+
+function editAvatar() {
+  renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
+  editavatar(avatarInput)
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить"),
+        closePopup(avatarPopup);
+    });
+}
+
+export let clientID;
+
+initialProfile()
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileJob.textContent = data.about;
+    avatarPic.src = data.avatar;
+    clientID = data._id;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+overlayPic.onmouseover = function () {
+  overlayPic.classList.add("profile__avatar_hover_active");
+};
+overlayPic.onmouseout = function () {
+  overlayPic.classList.remove("profile__avatar_hover_active");
+};
+
+// Открытие попапа для редактирования профиля и добавляения карточки
+
+function openPopupAvatar() {
+  openPopup(avatarPopup);
+}
+
+overlayPic.addEventListener("click", openPopupAvatar);
 profileEditButton.addEventListener("click", openPopupEdit);
 profileAddButton.addEventListener("click", openPopupAdd);
 // Закрытие попапов
@@ -54,15 +130,29 @@ popups.forEach((popup) => {
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 // Создание карточки
-import { createCard, handleFormAdd } from "../components/card.js";
-// Добавление карточки и реализация остальных функций на новых элементах
 
+// Добавление карточки и реализация остальных функций на новых элементах
+function handleFormAdd() {
+  renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
+  addCard(newcardName, newcardImage)
+    .then((data) => {
+      const placeElement = createCard(data, data.likes.length, data.owner._id);
+      placesContainer.prepend(placeElement)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
+      closePopup(profileAddPopup);
+      cardForm.reset();
+      buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
+    });
+}
 cardForm.addEventListener("submit", handleFormAdd);
 
 avatarForm.addEventListener("submit", editAvatar);
 
-
-import { enableValidation } from "../components/validate.js";
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
@@ -78,7 +168,6 @@ enableValidation({
   errorClass: "popup__input_error",
 });
 
-
 getInitialCards()
   .then((result) => {
     result.forEach(function (item) {
@@ -87,10 +176,5 @@ getInitialCards()
     });
   })
   .catch((err) => {
-    console.log(err); // выводим ошибку в консоль
+    console.log(err);
   });
-
-
-
-
-

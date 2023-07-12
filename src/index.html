@@ -16,8 +16,8 @@
     </header>
     <main>
       <section class="profile">
+        <div class="profile__avatar_hover"></div>
         <img class="profile__avatar" src="" alt="Аватар профиля пользователя" />
-        <img class="profile__avatar_hover" src="images/AvatarEdit.png" />
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <button
@@ -136,7 +136,6 @@
               name="Name"
               required
               placeholder="Название"
-              required
               minlength="2"
               maxlength="30"
               pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
@@ -173,7 +172,6 @@
         <button
           type="button"
           class="popup__close"
-          id="close-2"
           aria-label="закрыть"
         ></button>
         <img

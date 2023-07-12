@@ -8,6 +8,9 @@
   
 
 }
+.profile__avatar:hover {
+  opacity: 0.6;
+}
 @media (max-width: 767px) {
   .profile__avatar {
     margin: 0;

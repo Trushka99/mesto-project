@@ -1,19 +1,13 @@
 import {
-  newcardImage,
-  newcardName,
-  profileAddPopup,
   profieImagePopup,
   profileZoomedImage,
   profileZoomedImageCaption,
-  placesContainer,
   placeTemplate,
-  cardForm,
-  popupSubmitAdd,
 } from "./utils";
 
-import { openPopup, closePopup } from "./modal";
-import { deleteCard, cardLiked, cardDisliked } from "./api";
-
+import { openPopup } from "./modal";
+import { deleteCard, likeCard, disLikeCard } from "./api";
+import { clientID } from "../pages/index";
 function createCard(element, count, ownerID) {
   const cardElement = placeTemplate
     .querySelector(".elements__element")
@@ -30,25 +24,33 @@ function createCard(element, count, ownerID) {
   cardLikeButton.addEventListener("click", () => {
     cardLikeButton.classList.toggle("elements__heart_status_active");
     if (cardLikeButton.classList.contains("elements__heart_status_active")) {
-      ++count;
-      cardLiked(element._id);
+      likeCard(element._id)
+        .then(++count)
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      --count;
-      cardDisliked(element._id);
+      disLikeCard(element._id)
+        .then(--count)
+        .catch((err) => {
+          console.log(err);
+        });
     }
     likecount.textContent = count;
   });
-  if (ownerID === "26ba9d61f275b3dbc1475523") {
-    const cardDeleteButton = cardElement.querySelector(".elements__delete");
+  const cardDeleteButton = cardElement.querySelector(".elements__delete");
+  if (ownerID === clientID) {
     cardDeleteButton.classList.add("elements__delete_active");
     cardDeleteButton.addEventListener("click", () => {
-      deleteCard(element._id);
-      cardElement.remove();
+      deleteCard(element._id)
+        .then(cardElement.remove())
+        .catch((err) => {
+          console.log(err);
+        });
     });
   } else {
-    const h1 = cardElement.querySelector(".elements__delete");
-    const parent = h1.parentNode;
-    parent.removeChild(h1);
+    const parentElement = cardDeleteButton.parentNode;
+    parentElement.removeChild(cardDeleteButton);
   }
   // Попап с увеличенным изображением
   cardImage.addEventListener("click", () => {
@@ -60,17 +62,5 @@ function createCard(element, count, ownerID) {
 
   return cardElement;
 }
-import { buttonStateDisabled } from "./validate";
-import { addedCard } from "./api";
-function handleFormAdd() {
-  const item = {};
-  item.name = newcardName.value;
-  item.link = newcardImage.value;
-  const placeElement = createCard(item);
-  placesContainer.prepend(placeElement);
-  addedCard(newcardName, newcardImage);
-  closePopup(profileAddPopup);
-  cardForm.reset();
-  buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
-}
-export { createCard, handleFormAdd };
+
+export { createCard };

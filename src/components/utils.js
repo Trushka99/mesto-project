@@ -23,7 +23,9 @@ const avatarInput = document.querySelector("#popup_avatar");
 const avatarPic = document.querySelector(".profile__avatar");
 const overlayPic = document.querySelector(".profile__avatar_hover");
 const avatarForm = document.querySelector(".popup__form_avatar");
-const popupSubmitAvatar = document.querySelector('.popup__submit_avatar')
+const popupSubmitAvatar = document.querySelector(".popup__submit_avatar");
+const ESC = 27;
+const avatarPopup = document.querySelector(".popup_function_avatar");
 
 export {
   profileEditButton,
@@ -51,5 +53,7 @@ export {
   avatarPic,
   overlayPic,
   avatarForm,
-  popupSubmitAvatar
+  popupSubmitAvatar,
+  ESC,
+  avatarPopup,
 };

@@ -1,33 +1,14 @@
 import {
-  profileInfoPopup,
-  profileAddPopup,
   popups,
-  profileForm,
-  profileEditName,
-  profileEditJob,
-  profileName,
-  profileJob,
-  popupSubmitEdit,
-  avatarInput
+  ESC
 } from "./utils";
-import { hideInputError, buttonStateDisabled } from "./validate";
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.body.addEventListener("keyup", buttonClosePopup);
 }
 
-function openPopupEdit() {
-  openPopup(profileInfoPopup);
-  profileEditName.value = profileName.textContent;
-  profileEditJob.value = profileJob.textContent;
-  const input = profileInfoPopup.querySelectorAll(".popup__input");
-  input.forEach((input) => {
-    hideInputError(profileForm, input);
-  });
-}
-function openPopupAdd() {
-  openPopup(profileAddPopup);
-}
+
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.body.removeEventListener("keyup", buttonClosePopup);
@@ -36,7 +17,7 @@ function closePopup(popup) {
 function buttonClosePopup(e) {
   const key = e.keyCode;
   popups.forEach(function (popup) {
-    if (key == 27 && popup.classList.contains("popup_opened")) {
+    if (key == ESC && popup.classList.contains("popup_opened")) {
       closePopup(popup);
     }
   });
@@ -54,27 +35,11 @@ function popupOverlay(item, el) {
     item.stopPropagation();
   }
 }
-import { renderLoading, editProfile, editavatar } from "./api";
-function handleProfileFormSubmit() {
-  editProfile(profileEditName, profileEditJob)
-  profileName.textContent = profileEditName.value;
-  profileJob.textContent = profileEditJob.value;
-  closePopup(profileInfoPopup);
-  buttonStateDisabled(popupSubmitEdit, "popup__submit_inactive");
-}
 
-function editAvatar() {
-  editavatar(avatarInput)
-  closePopup(document.querySelector(".popup_function_avatar"));
-}
 
 export {
   openPopup,
-  openPopupEdit,
-  openPopupAdd,
   closePopup,
-  handleProfileFormSubmit,
   closePopupButton,
   popupOverlay,
-  editAvatar
 };
