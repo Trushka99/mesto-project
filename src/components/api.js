@@ -21,7 +21,7 @@ export function renderLoading(isLoading, button, text, text2) {
   }
 }
 
-export const initialProfile = () => {
+export const getInitialProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   }).then((res) => {

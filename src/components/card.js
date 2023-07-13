@@ -8,7 +8,7 @@ import {
 import { openPopup } from "./modal";
 import { deleteCard, likeCard, disLikeCard } from "./api";
 import { clientID } from "../pages/index";
-function createCard(element, count, ownerID) {
+function createCard(element, count, ownerID, likesmassive) {
   const cardElement = placeTemplate
     .querySelector(".elements__element")
     .cloneNode(true);
@@ -21,11 +21,17 @@ function createCard(element, count, ownerID) {
   const cardLikeButton = cardElement.querySelector(".elements__heart");
   const likecount = cardElement.querySelector(".elements__heart-count");
   likecount.textContent = count;
+  likesmassive.forEach((item) => {
+    if ((item._id === clientID)) {
+      cardLikeButton.classList.add("elements__heart_status_active")
+    }
+  });
   cardLikeButton.addEventListener("click", () => {
     cardLikeButton.classList.toggle("elements__heart_status_active");
     if (cardLikeButton.classList.contains("elements__heart_status_active")) {
       likeCard(element._id)
         .then(++count)
+        .then()
         .catch((err) => {
           console.log(err);
         });

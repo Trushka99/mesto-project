@@ -25,7 +25,7 @@ import {
 } from "../components/utils.js";
 import {
   getInitialCards,
-  initialProfile,
+  getInitialProfile,
   editProfile,
   renderLoading,
   editavatar,
@@ -63,14 +63,14 @@ function handleProfileFormSubmit() {
   editProfile(profileEditName, profileEditJob)
     .then(
       (profileName.textContent = profileEditName.value),
-      (profileJob.textContent = profileEditJob.value)
+      (profileJob.textContent = profileEditJob.value),
+      closePopup(profileInfoPopup)
     )
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
-      closePopup(profileInfoPopup);
     });
 
   buttonStateDisabled(popupSubmitEdit, "popup__submit_inactive");
@@ -79,18 +79,18 @@ function handleProfileFormSubmit() {
 function editAvatar() {
   renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
   editavatar(avatarInput)
+    .then((avatarPic.src = avatarInput.value), closePopup(avatarPopup))
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить"),
-        closePopup(avatarPopup);
+      renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить");
     });
 }
 
 export let clientID;
 
-initialProfile()
+getInitialProfile()
   .then((data) => {
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
@@ -136,15 +136,20 @@ function handleFormAdd() {
   renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
   addCard(newcardName, newcardImage)
     .then((data) => {
-      const placeElement = createCard(data, data.likes.length, data.owner._id);
-      placesContainer.prepend(placeElement)
+      const placeElement = createCard(
+        data,
+        data.likes.length,
+        data.owner._id,
+        data.likes
+      );
+      placesContainer.prepend(placeElement);
     })
+    .then(closePopup(profileAddPopup))
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
-      closePopup(profileAddPopup);
       cardForm.reset();
       buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
     });
@@ -171,7 +176,12 @@ enableValidation({
 getInitialCards()
   .then((result) => {
     result.forEach(function (item) {
-      const placeElement = createCard(item, item.likes.length, item.owner._id);
+      const placeElement = createCard(
+        item,
+        item.likes.length,
+        item.owner._id,
+        item.likes
+      );
       placesContainer.append(placeElement);
     });
   })
