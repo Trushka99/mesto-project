@@ -173,6 +173,9 @@ enableValidation({
   errorClass: "popup__input_error",
 });
 
+// import Section from '../components/section.js'
+
+
 getInitialCards()
   .then((result) => {
     result.forEach(function (item) {
@@ -188,3 +191,13 @@ getInitialCards()
   .catch((err) => {
     console.log(err);
   });
+
+
+  // const initialCardList = new Section({
+  //   data: items,
+  //   renderer: (item) => {
+  //     const card = new DefaultCard(item, '.default-card');
+  //     const cardElement = card.generate();
+  //     defaultCardList.setItem(cardElement);
+  //   }
+  // }, cardListSelector);
