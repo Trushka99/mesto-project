@@ -24,12 +24,10 @@ import {
   popupSubmitAdd,
 } from "../components/utils.js";
 import {
-  getInitialCards,
   getInitialProfile,
   editProfile,
   renderLoading,
   editavatar,
-  addCard,
 } from "../components/api.js";
 import "./index.css";
 import {
@@ -38,7 +36,6 @@ import {
   openPopup,
   closePopup,
 } from "../components/modal.js";
-import { createCard } from "../components/card.js";
 import {
   enableValidation,
   hideInputError,
@@ -129,32 +126,6 @@ popups.forEach((popup) => {
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-// Создание карточки
-
-// Добавление карточки и реализация остальных функций на новых элементах
-function handleFormAdd() {
-  renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
-  addCard(newcardName, newcardImage)
-    .then((data) => {
-      const placeElement = createCard(
-        data,
-        data.likes.length,
-        data.owner._id,
-        data.likes
-      );
-      placesContainer.prepend(placeElement);
-    })
-    .then(closePopup(profileAddPopup))
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
-      cardForm.reset();
-      buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
-    });
-}
-cardForm.addEventListener("submit", handleFormAdd);
 
 avatarForm.addEventListener("submit", editAvatar);
 
@@ -173,31 +144,92 @@ enableValidation({
   errorClass: "popup__input_error",
 });
 
-// import Section from '../components/section.js'
 
+import Section from "../components/section.js";
+import Card from "../components/card.js";
+import { Api } from "../components/api.js";
 
-getInitialCards()
-  .then((result) => {
-    result.forEach(function (item) {
-      const placeElement = createCard(
-        item,
-        item.likes.length,
-        item.owner._id,
-        item.likes
-      );
-      placesContainer.append(placeElement);
-    });
+const placeTemplate = document.querySelector("#place-template").content;
+
+const api = new Api({
+  url: "https://nomoreparties.co/v1/plus-cohort-26",
+  headers: {
+    authorization: "6bb49ea4-9d7a-4a97-8f53-ee02190921e9",
+    "Content-Type": "application/json",
+  },
+});
+// Создание карточки
+function createCards(data) {
+  const card = new Card(data, placeTemplate, clientID, {
+    cardDelete: (card, cardId) => {
+      api
+        .deleteCard(cardId)
+        .then(() => {
+          card.remove(placesContainer);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    putLike: (cardId) => {
+      api
+        .likeCard(cardId)
+        .then(() => {
+          card.countLike();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    dislike: (cardId) => {
+      api
+        .disLikeCard(cardId)
+        .then(() => {
+          card.countLike();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  });
+  return card.generate()
+}
+// заполнение карточками с сервера 
+api
+  .getInitialCards()
+  .then((res) => {
+    const rendercards = new Section(
+      {
+        data: res,
+        renderer: (item) => {
+          rendercards.setItem(createCards(item)
+          );
+        },
+      },
+      placesContainer
+    );
+    rendercards.renderItems();
   })
   .catch((err) => {
     console.log(err);
   });
 
-
-  // const initialCardList = new Section({
-  //   data: items,
-  //   renderer: (item) => {
-  //     const card = new DefaultCard(item, '.default-card');
-  //     const cardElement = card.generate();
-  //     defaultCardList.setItem(cardElement);
-  //   }
-  // }, cardListSelector);
+// функция добавления карточки
+function handleFormAdd() {
+  renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
+  api
+    .addCard(newcardName, newcardImage)
+    .then((data) => {
+      placesContainer.prepend(createCards(data));
+    })
+    .then(closePopup(profileAddPopup))
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
+      cardForm.reset();
+      buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
+    });
+}
+cardForm.addEventListener("submit", handleFormAdd);
