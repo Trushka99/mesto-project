@@ -22,20 +22,29 @@ import {
   newcardName,
   profileAddPopup,
   popupSubmitAdd,
+  profieImagePopup
 } from "../components/utils.js";
 import {
-  getInitialProfile,
-  editProfile,
-  renderLoading,
-  editavatar,
+  Api
 } from "../components/api.js";
 import "./index.css";
 import {
-  PopupWithForm
+  PopupWithForm,
+  PopupWithImage
 } from "../components/modal.js";
 import {
   FormValidator
 } from "../components/validate.js";
+import {Section} from "../components/section.js";
+import {Card} from "../components/card.js";
+
+const api = new Api({
+  url: "https://nomoreparties.co/v1/plus-cohort-26",
+  headers: {
+    authorization: "6bb49ea4-9d7a-4a97-8f53-ee02190921e9",
+    "Content-Type": "application/json",
+  },
+});
 
 const profileEditPopup = new PopupWithForm(profileInfoPopup, handleProfileFormSubmit);
 const addCardPopup = new PopupWithForm(profileAddPopup, handleFormAdd);
@@ -56,10 +65,18 @@ function openPopupAvatar() {
   avatarPopupObj.open();
 }
 
+function renderLoading(isLoading, button, text, text2) {
+  if (isLoading) {
+    thisbutton.textContent = text;
+  } else {
+    button.textContent = text2;
+  }
+}
+
 function handleProfileFormSubmit(data) {
   console.log(data[0]);
   renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
-  editProfile(data[0], data[1])
+  api.editProfile(data[0], data[1])
     .then(
       (profileName.textContent = data[0].value),
       (profileJob.textContent = data[1].value),
@@ -77,7 +94,7 @@ function handleProfileFormSubmit(data) {
 
 function editAvatar(avatarInput) {
   renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
-  editavatar(avatarInput[0])
+  api.editavatar(avatarInput[0])
     .then((avatarPic.src = avatarInput[0].value), avatarPopupObj.close())
     .catch((err) => {
       console.log(err);
@@ -170,21 +187,11 @@ const avatarFormValidate = new FormValidator({
 avatarFormValidate.enableValidation();
 
 
-import Section from "../components/section.js";
-import Card from "../components/card.js";
-import { Api } from "../components/api.js";
-
 const placeTemplate = document.querySelector("#place-template").content;
 
-const api = new Api({
-  url: "https://nomoreparties.co/v1/plus-cohort-26",
-  headers: {
-    authorization: "6bb49ea4-9d7a-4a97-8f53-ee02190921e9",
-    "Content-Type": "application/json",
-  },
-});
 // Создание карточки
 function createCards(data) {
+  const zoomedImage = new PopupWithImage(profieImagePopup);
   const card = new Card(data, placeTemplate, clientID, {
     cardDelete: (card, cardId) => {
       api

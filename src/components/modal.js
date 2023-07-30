@@ -1,5 +1,3 @@
-import { popups } from "./utils";
-
 export class Popup {
   constructor(popupSelector) {
     this.popupSelector = popupSelector;
