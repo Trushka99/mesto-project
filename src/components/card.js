@@ -5,7 +5,8 @@ import {
   placeTemplate,
 } from "./utils";
 
-import { openPopup } from "./modal";
+import {PopupWithImage} from "./modal.js";
+
 import { deleteCard, likeCard, disLikeCard } from "./api";
 import { clientID } from "../pages/index";
 function createCard(element, count, ownerID, likesmassive) {
@@ -59,11 +60,16 @@ function createCard(element, count, ownerID, likesmassive) {
     parentElement.removeChild(cardDeleteButton);
   }
   // Попап с увеличенным изображением
+
+  const zoomedPopup = new PopupWithImage(profieImagePopup);
+
+  zoomedPopup.setEventListeners();
+
   cardImage.addEventListener("click", () => {
-    openPopup(profieImagePopup);
-    profileZoomedImage.src = element.link;
+    zoomedPopup.open(element.link, element.name);
+    /*profileZoomedImage.src = element.link;
     profileZoomedImage.alt = element.name;
-    profileZoomedImageCaption.textContent = element.name;
+    profileZoomedImageCaption.textContent = element.name;*/
   });
 
   return cardElement;
@@ -71,7 +77,7 @@ function createCard(element, count, ownerID, likesmassive) {
 
 export { createCard };
 
-export default class Card {
+/*export default class Card {
   constructor(card, template, clientID, likesmassive, Data, handleActions) {
     // Данные с карточками и template элемент
     this._card = card;
@@ -144,4 +150,4 @@ export default class Card {
       this._cardDeleteButton.remove();
     }
   };
-}
+}*/

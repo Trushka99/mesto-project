@@ -30,6 +30,7 @@ export const getInitialProfile = () => {
 };
 
 export const editProfile = (profileName, profileJob) => {
+  console.log(profileName.value);
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
@@ -43,6 +44,7 @@ export const editProfile = (profileName, profileJob) => {
 };
 
 export function editavatar(input) {
+  console.log(input);
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
