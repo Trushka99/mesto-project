@@ -1,6 +1,5 @@
-
 export default class Card {
-  constructor(card, template, clientID, cardActions) {
+  constructor(card, template, clientID, cardActions, handleCardClick) {
     // Данные с карточками и template элемент
     this._card = card;
     this._name = this._card.name;
