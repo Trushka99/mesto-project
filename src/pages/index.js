@@ -41,7 +41,10 @@ import {
   hideInputError,
   buttonStateDisabled,
 } from "../components/validate.js";
-
+import Section from "../components/section.js";
+import Card from "../components/card.js";
+import Api from "../components/api.js";
+import UserInfo from "../components/userinfo.js";
 function openPopupEdit() {
   openPopup(profileInfoPopup);
   profileEditName.value = profileName.textContent;
@@ -84,19 +87,27 @@ function editAvatar() {
       renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить");
     });
 }
-
+const api = new Api({
+  url: "https://nomoreparties.co/v1/plus-cohort-26",
+  headers: {
+    authorization: "6bb49ea4-9d7a-4a97-8f53-ee02190921e9",
+    "Content-Type": "application/json",
+  },
+});
 export let clientID;
 
-getInitialProfile()
-  .then((data) => {
-    profileName.textContent = data.name;
-    profileJob.textContent = data.about;
-    avatarPic.src = data.avatar;
-    clientID = data._id;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const userInfo = new UserInfo({
+  nameSelector: profileName,
+  aboutSelector: profileJob,
+  avatarSelector: avatarPic,
+});
+api.getInitialProfile().then((res) => {
+  userInfo.gettUserInfo({name:res.name, about:res.about, avatar: res.avatar})
+  clientID = res._id
+}).catch((err) => {
+  console.log(err)
+})
+
 
 overlayPic.onmouseover = function () {
   overlayPic.classList.add("profile__avatar_hover_active");
@@ -126,7 +137,6 @@ popups.forEach((popup) => {
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-
 avatarForm.addEventListener("submit", editAvatar);
 
 // включение валидации вызовом enableValidation
@@ -144,20 +154,8 @@ enableValidation({
   errorClass: "popup__input_error",
 });
 
-
-import Section from "../components/section.js";
-import Card from "../components/card.js";
-import { Api } from "../components/api.js";
-
 const placeTemplate = document.querySelector("#place-template").content;
 
-const api = new Api({
-  url: "https://nomoreparties.co/v1/plus-cohort-26",
-  headers: {
-    authorization: "6bb49ea4-9d7a-4a97-8f53-ee02190921e9",
-    "Content-Type": "application/json",
-  },
-});
 // Создание карточки
 function createCards(data) {
   const card = new Card(data, placeTemplate, clientID, {
@@ -192,9 +190,9 @@ function createCards(data) {
         });
     },
   });
-  return card.generate()
+  return card.generate();
 }
-// заполнение карточками с сервера 
+// заполнение карточками с сервера
 api
   .getInitialCards()
   .then((res) => {
@@ -202,8 +200,7 @@ api
       {
         data: res,
         renderer: (item) => {
-          rendercards.setItem(createCards(item)
-          );
+          rendercards.setItem(createCards(item));
         },
       },
       placesContainer

@@ -102,7 +102,7 @@ export const disLikeCard = (cardId) => {
   });
 };
 
- class Api {
+ export default class Api {
   constructor({url, headers}) {
     this._url = url;
     this._headers = headers;
@@ -205,4 +205,3 @@ export const disLikeCard = (cardId) => {
     });
   };
 }
-export {Api}
