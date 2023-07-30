@@ -24,9 +24,9 @@ import {
   popupSubmitAdd,
   profieImagePopup
 } from "../components/utils.js";
-import {
+import 
   Api
-} from "../components/api.js";
+ from "../components/api.js";
 import "./index.css";
 import {
   PopupWithForm,
@@ -35,9 +35,9 @@ import {
 import {
   FormValidator
 } from "../components/validate.js";
-import {Section} from "../components/section.js";
-import {Card} from "../components/card.js";
-
+import Section from "../components/section.js";
+import Card from "../components/card.js";
+import UserInfo from '../components/userinfo.js'
 const api = new Api({
   url: "https://nomoreparties.co/v1/plus-cohort-26",
   headers: {
@@ -47,9 +47,10 @@ const api = new Api({
 });
 
 const profileEditPopup = new PopupWithForm(profileInfoPopup, handleProfileFormSubmit);
-const addCardPopup = new PopupWithForm(profileAddPopup, handleFormAdd);
+const addCardPopup = new PopupWithForm(profileAddPopup, handleFormAdd)
 const avatarPopupObj = new PopupWithForm(avatarPopup, editAvatar);
-
+const zoomedImage = new PopupWithImage(profieImagePopup);
+zoomedImage.setEventListeners()
 
 function openPopupEditProfile() {
   profileEditPopup.open();
@@ -67,7 +68,7 @@ function openPopupAvatar() {
 
 function renderLoading(isLoading, button, text, text2) {
   if (isLoading) {
-    thisbutton.textContent = text;
+    button.textContent = text;
   } else {
     button.textContent = text2;
   }
@@ -138,28 +139,6 @@ avatarPopupObj.setEventListeners();
 
 // Создание карточки
 
-// Добавление карточки и реализация остальных функций на новых элементах
-function handleFormAdd(data) {
-  renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
-  addCard(data[0], data[1])
-    .then((data) => {
-      const placeElement = createCard(
-        data,
-        data.likes.length,
-        data.owner._id,
-        data.likes
-      );
-      placesContainer.prepend(placeElement);
-    })
-    .then(addCardPopup.close())
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
-    });
-}
-
 
 const profileValidate = new FormValidator({
   inputSelector: ".popup__input",
@@ -193,7 +172,7 @@ const placeTemplate = document.querySelector("#place-template").content;
 
 // Создание карточки
 function createCards(data) {
-  const zoomedImage = new PopupWithImage(profieImagePopup);
+
   const card = new Card(data, placeTemplate, clientID, {
     cardDelete: (card, cardId) => {
       api
@@ -225,6 +204,7 @@ function createCards(data) {
           console.log(err);
         });
     },
+    zoomImage: () => { zoomedImage.open(data.link,data.name) },
   });
   return card.generate();
 }
@@ -232,6 +212,7 @@ function createCards(data) {
 api
   .getInitialCards()
   .then((res) => {
+    console.log(res)
     const rendercards = new Section(
       {
         data: res,
@@ -255,14 +236,13 @@ function handleFormAdd() {
     .then((data) => {
       placesContainer.prepend(createCards(data));
     })
-    .then(closePopup(profileAddPopup))
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
       cardForm.reset();
-      buttonStateDisabled(popupSubmitAdd, "popup__submit_inactive");
+      addCardPopup.close()
+      
     });
 }
-cardForm.addEventListener("submit", handleFormAdd);

@@ -8,10 +8,6 @@ export default class Section {
   setItem(element) {
     this._container.append(element);
   }
-
-  clear() {
-    this._container.innerHTML = '';
-  }
   renderItems() {
     this._renderedItems.forEach(this._renderer)
   }

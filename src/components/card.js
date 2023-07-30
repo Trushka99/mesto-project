@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(card, template, clientID, cardActions, handleCardClick) {
+  constructor(card, template, clientID, cardActions) {
     // Данные с карточками и template элемент
     this._card = card;
     this._name = this._card.name;
@@ -15,6 +15,7 @@ export default class Card {
     this._cardRemove = cardActions.cardDelete;
     this._putLikes = cardActions.putLike;
     this._dislike = cardActions.dislike;
+    this._zoomImage = cardActions.zoomImage
   }
 
   _getElement() {
@@ -70,7 +71,7 @@ export default class Card {
   }
   _setEventHandlers = () => {
     this._cardLikeButton.addEventListener("click", () => this._putLike());
-
+    this._cardImage.addEventListener('click',() => this._zoomImage())
     if (this._ownerId === this._clientID) {
       this._cardDeleteButton.classList.add("elements__delete_active");
       this._cardDeleteButton.addEventListener("click", () =>
