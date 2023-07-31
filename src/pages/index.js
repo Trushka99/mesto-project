@@ -1,21 +1,16 @@
 import {
   profileEditButton,
   profileAddButton,
-  profileForm,
   cardForm,
   placesContainer,
-  closeButtons,
-  popups,
   profileName,
   profileJob,
   avatarPic,
   overlayPic,
-  avatarForm,
   profileEditName,
   profileEditJob,
   profileInfoPopup,
   popupSubmitEdit,
-  avatarInput,
   popupSubmitAvatar,
   avatarPopup,
   newcardImage,
@@ -38,6 +33,7 @@ import {
 import Section from "../components/section.js";
 import Card from "../components/card.js";
 import UserInfo from '../components/userinfo.js'
+
 const api = new Api({
   url: "https://nomoreparties.co/v1/plus-cohort-26",
   headers: {
