@@ -15,7 +15,7 @@ export default class Card {
     this._cardRemove = cardActions.cardDelete;
     this._putLikes = cardActions.putLike;
     this._dislike = cardActions.dislike;
-    this._zoomImage = cardActions.zoomImage
+    this._zoomImage = cardActions.zoomImage;
   }
 
   _getElement() {
@@ -25,31 +25,32 @@ export default class Card {
 
     return cardElement;
   }
-  _getLikes() {
-    this._likes.forEach((item) => {
-      if (item._id === this._clientID) {
+  _getLikes(card) {
+    this._likes = card.likes;
+    this._count = this._likes.length;
+    this._likeCount.textContent = this._count;
+    this._likes.forEach(() => {
+      if (this._likedCard()) {
         this._cardLikeButton.classList.add("elements__heart_status_active");
+      } else {
+        this._cardLikeButton.classList.remove("elements__heart_status_active");
       }
     });
   }
-  _putLike() {
-    this._cardLikeButton.classList.toggle("elements__heart_status_active");
-    if (
-      this._cardLikeButton.classList.contains("elements__heart_status_active")
-    ) {
-      this._putLikes(this._card._id);
-    } else {
-      this._dislike(this._card._id);
-    }
+  _likedCard() {
+    // Возврат без переменной, так как объявление переменной будет избыточной (Local variable is redundant)
+    return this._likes.find((userLike) => userLike._id === this._clientID);
   }
-  countLike() {
-    if (
-      this._cardLikeButton.classList.contains("elements__heart_status_active")
-    ) {
-      this._likeCount.textContent++;
-    } else {
-      this._likeCount.textContent--;
-    }
+_interactLike() {
+    this._likes.forEach(() => {
+      if (this._likedCard()) {
+        this._dislike(this._card._id);
+      } else {
+        this._putLikes(this._card._id);
+        
+      }
+    });
+
   }
   deleteCard() {
     this._element.remove();
@@ -63,19 +64,19 @@ export default class Card {
 
     this._cardLikeButton = this._element.querySelector(".elements__heart");
     this._likeCount = this._element.querySelector(".elements__heart-count");
-    this._getLikes();
     this._likeCount.textContent = this._count;
+    this._getLikes(this._card);
     this._cardDeleteButton = this._element.querySelector(".elements__delete");
     this._setEventHandlers();
     return this._element;
   }
   _setEventHandlers = () => {
-    this._cardLikeButton.addEventListener("click", () => this._putLike());
-    this._cardImage.addEventListener('click',() => this._zoomImage())
+    this._cardLikeButton.addEventListener("click", () => this._interactLike());
+    this._cardImage.addEventListener("click", () => this._zoomImage());
     if (this._ownerId === this._clientID) {
       this._cardDeleteButton.classList.add("elements__delete_active");
       this._cardDeleteButton.addEventListener("click", () =>
-        this._cardRemove(this._element, this._card._id)
+        this._cardRemove(this._card._id)
       );
     } else {
       this._cardDeleteButton.remove();

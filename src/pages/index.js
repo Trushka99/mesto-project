@@ -108,12 +108,6 @@ const userInfo = new UserInfo({
   aboutSelector: profileJob,
   avatarSelector: avatarPic,
 });
-api.getInitialProfile().then((res) => {
-  userInfo.gettUserInfo({name:res.name, about:res.about, avatar: res.avatar})
-  clientID = res._id
-}).catch((err) => {
-  console.log(err)
-})
 
 
 overlayPic.onmouseover = function () {
@@ -127,13 +121,11 @@ overlayPic.onmouseout = function () {
 overlayPic.addEventListener("click", openPopupAvatar);
 profileEditButton.addEventListener("click", openPopupEditProfile);
 profileAddButton.addEventListener("click", openPopupAddCard);
-// Закрытие попапов
 
 profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
 avatarPopupObj.setEventListeners();
 
-// Создание карточки
 
 
 const profileValidate = new FormValidator({
@@ -170,11 +162,11 @@ const placeTemplate = document.querySelector("#place-template").content;
 function createCards(data) {
 
   const card = new Card(data, placeTemplate, clientID, {
-    cardDelete: (card, cardId) => {
+    cardDelete: (cardId) => {
       api
         .deleteCard(cardId)
         .then(() => {
-          card.remove(placesContainer);
+          card.deleteCard()
         })
         .catch((err) => {
           console.log(err);
@@ -183,8 +175,8 @@ function createCards(data) {
     putLike: (cardId) => {
       api
         .likeCard(cardId)
-        .then(() => {
-          card.countLike();
+        .then((res) => {
+          card._getLikes(res);
         })
         .catch((err) => {
           console.log(err);
@@ -193,8 +185,8 @@ function createCards(data) {
     dislike: (cardId) => {
       api
         .disLikeCard(cardId)
-        .then(() => {
-          card.countLike();
+        .then((res) => {
+          card._getLikes(res);
         })
         .catch((err) => {
           console.log(err);
@@ -204,33 +196,32 @@ function createCards(data) {
   });
   return card.generate();
 }
-// заполнение карточками с сервера
-api
-  .getInitialCards()
-  .then((res) => {
-    console.log(res)
-    const rendercards = new Section(
-      {
-        data: res,
-        renderer: (item) => {
-          rendercards.setItem(createCards(item));
-        },
+// заполнение карточками и профиля с сервера
+Promise.all([ api.getInitialProfile(), api.getInitialCards() ]).then(([ userData, cardData ]) => {
+  clientID = userData._id;
+  userInfo.gettUserInfo({name:userData.name, about:userData.about, avatar: userData.avatar})
+  const rendercards = new Section(
+    {
+      data: cardData,
+      renderer: (item) => {
+        rendercards.setItem(createCards(item));
       },
-      placesContainer
-    );
-    rendercards.renderItems();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
+    },
+    placesContainer
+  );
+  rendercards.renderItems();
+})
+.catch((err) => { console.log(`Возникла глобальная ошибка, ${err}`) })
 // функция добавления карточки
 function handleFormAdd() {
   renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
   api
     .addCard(newcardName, newcardImage)
-    .then((data) => {
-      placesContainer.prepend(createCards(data));
+    .then((res) => {
+      const rendercards = new Section({data: res,  renderer: () => {
+        rendercards.setItem(createCards(res));
+      }},placesContainer)
+      rendercards.setItem(createCards(res))
     })
     .catch((err) => {
       console.log(err);
