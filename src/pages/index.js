@@ -47,9 +47,8 @@ zoomedImage.setEventListeners();
 
 function openPopupEditProfile() {
   profileEditPopup.open();
-  const userInfoObject = userInfo.getUserInfo();
-  profileEditName.value = userInfoObject.name;
-  profileEditJob.value = userInfoObject.about;
+  profileEditName.value = profileName.textContent;
+  profileEditJob.value = profileJob.textContent;
 }
 
 function openPopupAddCard() {
@@ -60,35 +59,41 @@ function openPopupAvatar() {
   avatarPopupObj.open();
 }
 
+function renderLoading(isLoading, button, text, text2) {
+  if (isLoading) {
+    button.textContent = text;
+  } else {
+    button.textContent = text2;
+  }
+}
+
 function handleProfileFormSubmit(data) {
-  profileEditPopup.renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
+  renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
   api
     .editProfile(data.value[0], data.value[1])
-    .then(() =>
+    .then(
       (profileName.textContent = data.value[0].value),
-      (profileJob.textContent = data.value[1].value)
+      (profileJob.textContent = data.value[1].value),
+      profileEditPopup.close()
     )
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      profileEditPopup.renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
-      profileEditPopup.close();
+      renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
     });
 }
 
 function editAvatar(avatarInput) {
-  avatarPopupObj.renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
+  renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
   api
     .editavatar(avatarInput.value[0])
-    .then(() => 
-    avatarPic.src = avatarInput.value[0].value)
+    .then((avatarPic.src = avatarInput.value[0].value), avatarPopupObj.close())
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      avatarPopupObj.renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить");
-      avatarPopupObj.close();
+      renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить");
     });
 }
 
@@ -217,7 +222,7 @@ Promise.all([api.getInitialProfile(), api.getInitialCards()])
   });
 // функция добавления карточки
 function handleFormAdd() {
-  addCardPopup.renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
+  renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
   api
     .addCard(newcardName, newcardImage)
     .then((res) => {
@@ -228,7 +233,7 @@ function handleFormAdd() {
       console.log(err);
     })
     .finally(() => {
-      addCardPopup.renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
+      renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
       cardForm.reset();
       addCardPopup.close();
     });

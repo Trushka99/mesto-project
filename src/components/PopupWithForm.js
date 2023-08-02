@@ -24,14 +24,6 @@ export class PopupWithForm extends Popup {
       super.close();
       this.popupElement.querySelector('.popup__form').reset();
     }
-
-    renderLoading(isLoading, button, text, text2) {
-      if (isLoading) {
-        button.textContent = text;
-      } else {
-        button.textContent = text2;
-      }
-    }
   
     setEventListeners() {
       super.setEventListeners();
