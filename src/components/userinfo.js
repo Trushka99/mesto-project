@@ -4,7 +4,14 @@ export default class UserInfo {
     this._about = aboutSelector;
     this._avatar = avatarSelector;
   }
-  gettUserInfo({ name, about, avatar }) {
+  getUserInfo() {
+    return {
+      name: this._name.textContent,
+      about: this._about.textContent,
+      avatar: this._avatar.textContent
+    }
+  }
+  settUserInfo({ name, about, avatar }) {
     this._name.textContent = name;
     this._about.textContent = about;
     this._avatar.src = avatar;

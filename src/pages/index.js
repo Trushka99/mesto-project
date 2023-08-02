@@ -198,7 +198,7 @@ function createCards(data) {
 // заполнение карточками и профиля с сервера
 Promise.all([ api.getInitialProfile(), api.getInitialCards() ]).then(([ userData, cardData ]) => {
   clientID = userData._id;
-  userInfo.gettUserInfo({name:userData.name, about:userData.about, avatar: userData.avatar})
+  userInfo.settUserInfo({name:userData.name, about:userData.about, avatar: userData.avatar})
   const rendercards = new Section(
     {
       data: cardData,
@@ -210,7 +210,7 @@ Promise.all([ api.getInitialProfile(), api.getInitialCards() ]).then(([ userData
   );
   rendercards.renderItems();
 })
-.catch((err) => { console.log(`Возникла глобальная ошибка, ${err}`) })
+.catch((err) => { console.log(`Возникла ошибка, ${err}`) })
 // функция добавления карточки
 function handleFormAdd() {
   renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
