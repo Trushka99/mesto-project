@@ -29,28 +29,23 @@ export default class Card {
     this._likes = card.likes;
     this._count = this._likes.length;
     this._likeCount.textContent = this._count;
-    this._likes.forEach(() => {
-      if (this._likedCard()) {
-        this._cardLikeButton.classList.add("elements__heart_status_active");
-      } else {
-        this._cardLikeButton.classList.remove("elements__heart_status_active");
-      }
-    });
+    if (this._likeStatus()) {
+      this._cardLikeButton.classList.remove("elements__heart_status_active");
+    } else {
+      this._cardLikeButton.classList.add("elements__heart_status_active");
+    }
   }
-  _likedCard() {
-    // Возврат без переменной, так как объявление переменной будет избыточной (Local variable is redundant)
-    return this._likes.find((userLike) => userLike._id === this._clientID);
+  _likeStatus() {
+    return this._cardLikeButton.classList.contains(
+      "elements__heart_status_active"
+    );
   }
-_interactLike() {
-    this._likes.forEach(() => {
-      if (this._likedCard()) {
-        this._dislike(this._card._id);
-      } else {
-        this._putLikes(this._card._id);
-        
-      }
-    });
-
+  _interactLike() {
+    if (this._likeStatus()) {
+      this._dislike(this._card._id);
+    } else {
+      this._putLikes(this._card._id);
+    }
   }
   deleteCard() {
     this._element.remove();
@@ -65,7 +60,13 @@ _interactLike() {
     this._cardLikeButton = this._element.querySelector(".elements__heart");
     this._likeCount = this._element.querySelector(".elements__heart-count");
     this._likeCount.textContent = this._count;
-    this._getLikes(this._card);
+    this._likes.forEach((item) => {
+      if (item._id === this._clientID) {
+        this._cardLikeButton.classList.add("elements__heart_status_active");
+      } else {
+        this._cardLikeButton.classList.remove("elements__heart_status_active");
+      }
+    });
     this._cardDeleteButton = this._element.querySelector(".elements__delete");
     this._setEventHandlers();
     return this._element;
