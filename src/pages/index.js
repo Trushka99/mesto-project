@@ -24,9 +24,11 @@ import
  from "../components/api.js";
 import "./index.css";
 import {
-  PopupWithForm,
+  PopupWithForm
+} from "../components/PopupWithForm.js";
+import {
   PopupWithImage
-} from "../components/modal.js";
+} from "../components/PopupWithImage.js";
 import {
   FormValidator
 } from "../components/validate.js";
@@ -42,10 +44,10 @@ const api = new Api({
   },
 });
 
-const profileEditPopup = new PopupWithForm(profileInfoPopup, handleProfileFormSubmit);
-const addCardPopup = new PopupWithForm(profileAddPopup, handleFormAdd)
-const avatarPopupObj = new PopupWithForm(avatarPopup, editAvatar);
-const zoomedImage = new PopupWithImage(profieImagePopup);
+const profileEditPopup = new PopupWithForm(".popup_function_edit", handleProfileFormSubmit);
+const addCardPopup = new PopupWithForm(".popup_function_add", handleFormAdd)
+const avatarPopupObj = new PopupWithForm(".popup_function_avatar", editAvatar);
+const zoomedImage = new PopupWithImage(".popup_function_zoom");
 zoomedImage.setEventListeners()
 
 function openPopupEditProfile() {
@@ -71,12 +73,11 @@ function renderLoading(isLoading, button, text, text2) {
 }
 
 function handleProfileFormSubmit(data) {
-  console.log(data[0]);
   renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
-  api.editProfile(data[0], data[1])
+  api.editProfile(data.value[0], data.value[1])
     .then(
-      (profileName.textContent = data[0].value),
-      (profileJob.textContent = data[1].value),
+      (profileName.textContent = data.value[0].value),
+      (profileJob.textContent = data.value[1].value),
       profileEditPopup.close()
     )
     .catch((err) => {
@@ -85,14 +86,12 @@ function handleProfileFormSubmit(data) {
     .finally(() => {
       renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
     });
-
-  /*buttonStateDisabled(popupSubmitEdit, "popup__submit_inactive");*/
 }
 
 function editAvatar(avatarInput) {
   renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
-  api.editavatar(avatarInput[0])
-    .then((avatarPic.src = avatarInput[0].value), avatarPopupObj.close())
+  api.editavatar(avatarInput.value[0])
+    .then((avatarPic.src = avatarInput.value[0].value), avatarPopupObj.close())
     .catch((err) => {
       console.log(err);
     })
