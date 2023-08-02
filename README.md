@@ -31,6 +31,3 @@
 * Ссылка на live сайт: https://trushka99.github.io/mesto-project/
 * ![image](https://github.com/Trushka99/mesto-project/assets/129888336/35e6db34-1b13-4ed6-b996-cef430098cfb)
 
-**Коллаборация**
-
-namelessone154@yandex.ru — https://github.com/zoomkolol/mesto-project
