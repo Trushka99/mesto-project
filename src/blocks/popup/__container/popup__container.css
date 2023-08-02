@@ -1,4 +1,6 @@
 .popup__container {
+  position: inherit;
+  z-index: 2;
   background-color: white;
   color: black;
   width: 430px;

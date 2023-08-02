@@ -3,7 +3,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   align-content: center;
-  max-width: 90%;
+  min-width: 85%;
   margin: 0 auto;
   margin-top: 15px;
   min-height: 35px;
