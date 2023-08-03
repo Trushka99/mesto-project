@@ -13,11 +13,8 @@ import {
   popupSubmitEdit,
   popupSubmitAvatar,
   avatarPopup,
-  newcardImage,
-  newcardName,
   profileAddPopup,
   popupSubmitAdd,
-  profieImagePopup,
 } from "../components/utils.js";
 import Api from "../components/api.js";
 import "./index.css";
@@ -36,10 +33,7 @@ const api = new Api({
   },
 });
 
-const profileEditPopup = new PopupWithForm(
-  ".popup_function_edit",
-  handleProfileFormSubmit
-);
+const profileEditPopup = new PopupWithForm(".popup_function_edit", handleProfileFormSubmit);
 const addCardPopup = new PopupWithForm(".popup_function_add", handleFormAdd);
 const avatarPopupObj = new PopupWithForm(".popup_function_avatar", editAvatar);
 const zoomedImage = new PopupWithImage(".popup_function_zoom");
@@ -63,32 +57,37 @@ function openPopupAvatar() {
 function handleProfileFormSubmit(data) {
   profileEditPopup.renderLoading(true, popupSubmitEdit, "Сохранение..", "Сохранить");
   api
-    .editProfile(data.value[0], data.value[1])
-    .then(() =>
-      (profileName.textContent = data.value[0].value),
-      (profileJob.textContent = data.value[1].value)
-    )
+    .editProfile(data.Name, data.Subname)
+    .then(() => {
+      userInfo.settUserInfo( {
+        name: data.Name,
+        about: data.Subname
+      });
+      profileEditPopup.close();
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       profileEditPopup.renderLoading(false, popupSubmitEdit, "Сохранение..", "Сохранить");
-      profileEditPopup.close();
     });
 }
 
 function editAvatar(avatarInput) {
   avatarPopupObj.renderLoading(true, popupSubmitAvatar, "Сохранение..", "Сохранить");
   api
-    .editavatar(avatarInput.value[0])
-    .then(() => 
-    avatarPic.src = avatarInput.value[0].value)
+    .editavatar(avatarInput.avatar)
+    .then(() => {
+      userInfo.setUserAvatar({
+        avatar: avatarInput.avatar
+      })
+      avatarPopupObj.close();
+    })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       avatarPopupObj.renderLoading(false, popupSubmitAvatar, "Сохранение..", "Сохранить");
-      avatarPopupObj.close();
     });
 }
 
@@ -198,9 +197,11 @@ Promise.all([api.getInitialProfile(), api.getInitialCards()])
     clientID = userData._id;
     userInfo.settUserInfo({
       name: userData.name,
-      about: userData.about,
-      avatar: userData.avatar,
+      about: userData.about
     });
+    userInfo.setUserAvatar({
+      avatar: userData.avatar
+    })
     const rendercards = new Section(
       {
         data: cardData,
@@ -216,13 +217,14 @@ Promise.all([api.getInitialProfile(), api.getInitialCards()])
     console.log(`Возникла ошибка, ${err}`);
   });
 // функция добавления карточки
-function handleFormAdd() {
+function handleFormAdd(data) {
   addCardPopup.renderLoading(true, popupSubmitAdd, "Создание...", "Создать");
   api
-    .addCard(newcardName, newcardImage)
+    .addCard(data.cardPlace, data.cardInput)
     .then((res) => {
       const rendercards = new Section({}, placesContainer);
       rendercards.setItem(createCards(res));
+      addCardPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -230,6 +232,5 @@ function handleFormAdd() {
     .finally(() => {
       addCardPopup.renderLoading(false, popupSubmitAdd, "Создание...", "Создать");
       cardForm.reset();
-      addCardPopup.close();
     });
 }

@@ -9,15 +9,13 @@ export class PopupWithForm extends Popup {
     }
   
     _getInputValues() { 
-      const inputsValues = this.inputsArray.map((input) => {
-        return {
-          value: input.value
-        };
-      });
+      const valuesObject = {};
 
-      const inputObj = { value: inputsValues };
-      console.log(inputObj);
-      return inputObj;
+      this.inputsArray.forEach((input) => {
+        valuesObject[input.name] = input.value;
+      });
+      console.log(valuesObject);
+      return valuesObject;
     }
   
     close() {

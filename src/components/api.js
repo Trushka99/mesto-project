@@ -32,8 +32,8 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: profileName.value,
-        about: profileJob.value,
+        name: profileName,
+        about: profileJob,
       }),
     }).then((res) => {
       return this._getResponseData(res);
@@ -46,7 +46,7 @@ export default class Api {
       headers: this._headers,
 
       body: JSON.stringify({
-        avatar: input.value,
+        avatar: input,
       }),
     }).then((res) => {
       return this._getResponseData(res);
@@ -58,8 +58,8 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: newname.value,
-        link: newlink.value,
+        name: newname,
+        link: newlink,
       }),
     }).then((res) => {
       return this._getResponseData(res);
