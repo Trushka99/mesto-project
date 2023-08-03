@@ -5,7 +5,6 @@ export class PopupWithForm extends Popup {
       super(popupSelector);
       this.formSubmit = formSubmit;
       this.inputsArray = Array.from(this.popupElement.querySelectorAll('.popup__input'));
-      console.log(this.inputsArray);
     }
   
     _getInputValues() { 
@@ -14,7 +13,6 @@ export class PopupWithForm extends Popup {
       this.inputsArray.forEach((input) => {
         valuesObject[input.name] = input.value;
       });
-      console.log(valuesObject);
       return valuesObject;
     }
   

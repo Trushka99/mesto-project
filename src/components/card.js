@@ -29,11 +29,7 @@ export default class Card {
     this._likes = card.likes;
     this._count = this._likes.length;
     this._likeCount.textContent = this._count;
-    if (this._likeStatus()) {
-      this._cardLikeButton.classList.remove("elements__heart_status_active");
-    } else {
-      this._cardLikeButton.classList.add("elements__heart_status_active");
-    }
+    this._cardLikeButton.classList.toggle('elements__heart_status_active')
   }
   _likeStatus() {
     return this._cardLikeButton.classList.contains(

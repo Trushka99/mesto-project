@@ -191,6 +191,7 @@ function createCards(data) {
   });
   return card.generate();
 }
+let rendercards;
 // заполнение карточками и профиля с сервера
 Promise.all([api.getInitialProfile(), api.getInitialCards()])
   .then(([userData, cardData]) => {
@@ -202,7 +203,7 @@ Promise.all([api.getInitialProfile(), api.getInitialCards()])
     userInfo.setUserAvatar({
       avatar: userData.avatar
     })
-    const rendercards = new Section(
+    rendercards = new Section(
       {
         data: cardData,
         renderer: (item) => {
@@ -222,7 +223,6 @@ function handleFormAdd(data) {
   api
     .addCard(data.cardPlace, data.cardInput)
     .then((res) => {
-      const rendercards = new Section({}, placesContainer);
       rendercards.setItem(createCards(res));
       addCardPopup.close();
     })
