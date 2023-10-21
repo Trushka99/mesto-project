@@ -1,4 +1,3 @@
-
 export default class Card {
   constructor(card, template, clientID, cardActions) {
     // Данные с карточками и template элемент
@@ -16,6 +15,7 @@ export default class Card {
     this._cardRemove = cardActions.cardDelete;
     this._putLikes = cardActions.putLike;
     this._dislike = cardActions.dislike;
+    this._zoomImage = cardActions.zoomImage;
   }
 
   _getElement() {
@@ -25,30 +25,22 @@ export default class Card {
 
     return cardElement;
   }
-  _getLikes() {
-    this._likes.forEach((item) => {
-      if (item._id === this._clientID) {
-        this._cardLikeButton.classList.add("elements__heart_status_active");
-      }
-    });
+  _getLikes(card) {
+    this._likes = card.likes;
+    this._count = this._likes.length;
+    this._likeCount.textContent = this._count;
+    this._cardLikeButton.classList.toggle('elements__heart_status_active')
   }
-  _putLike() {
-    this._cardLikeButton.classList.toggle("elements__heart_status_active");
-    if (
-      this._cardLikeButton.classList.contains("elements__heart_status_active")
-    ) {
-      this._putLikes(this._card._id);
-    } else {
+  _likeStatus() {
+    return this._cardLikeButton.classList.contains(
+      "elements__heart_status_active"
+    );
+  }
+  _interactLike() {
+    if (this._likeStatus()) {
       this._dislike(this._card._id);
-    }
-  }
-  countLike() {
-    if (
-      this._cardLikeButton.classList.contains("elements__heart_status_active")
-    ) {
-      this._likeCount.textContent++;
     } else {
-      this._likeCount.textContent--;
+      this._putLikes(this._card._id);
     }
   }
   deleteCard() {
@@ -63,19 +55,25 @@ export default class Card {
 
     this._cardLikeButton = this._element.querySelector(".elements__heart");
     this._likeCount = this._element.querySelector(".elements__heart-count");
-    this._getLikes();
     this._likeCount.textContent = this._count;
+    this._likes.forEach((item) => {
+      if (item._id === this._clientID) {
+        this._cardLikeButton.classList.add("elements__heart_status_active");
+      } else {
+        this._cardLikeButton.classList.remove("elements__heart_status_active");
+      }
+    });
     this._cardDeleteButton = this._element.querySelector(".elements__delete");
     this._setEventHandlers();
     return this._element;
   }
   _setEventHandlers = () => {
-    this._cardLikeButton.addEventListener("click", () => this._putLike());
-
+    this._cardLikeButton.addEventListener("click", () => this._interactLike());
+    this._cardImage.addEventListener("click", () => this._zoomImage());
     if (this._ownerId === this._clientID) {
       this._cardDeleteButton.classList.add("elements__delete_active");
       this._cardDeleteButton.addEventListener("click", () =>
-        this._cardRemove(this._element, this._card._id)
+        this._cardRemove(this._card._id)
       );
     } else {
       this._cardDeleteButton.remove();
